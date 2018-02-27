@@ -30,5 +30,6 @@
         @yield('content')   
     </div>
     @include('includes.footer')
+    @yield('js')
 </body>
 </html>

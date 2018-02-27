@@ -21,33 +21,37 @@
             <h1 class="title title-2">Register a Child</h1>
             <div class="content-wrapper">
                 <div class="col-md-12">                    
-                    <form>
+                    <form action="/register/save" method="post" enctype="multipart/form-data">
+                        {{csrf_field()}}
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label class="input-label" for="firstName">First Name</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                                <input type="text" name="child_fname" class="form-control" id="firstName" placeholder="First Name" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="input-label" for="lastName">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                                <input type="text" name="child_lname" class="form-control" id="lastName" placeholder="Last Name" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="input-label" for="age">Age</label>
-                                <input type="number" class="form-control" id="age" placeholder="Age" required>
+                                <input type="number" name="child_age" class="form-control" id="age" placeholder="Age" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="input-label" for="location">Location</label>
-                                <textarea class="form-control" id="location" rows="3"></textarea>
+                                <textarea class="form-control" name="child_location" id="location" rows="3"></textarea>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="input-label" for="description">Description</label>
-                                <textarea class="form-control" id="description" rows="3"></textarea>
+                                <textarea class="form-control" name="child_desc" id="description" rows="3"></textarea>
                             </div>
                             <div class="form-group col-md-12">
                                 <div class="custom-file">
                                     <label class="custom-file-label" for="childPic">Child{{ "'" }}s Photo</label>
-                                    <input type="file" class="custom-file-input" id="childPic" required>
+                                    <input type="file" name="child_image" class="custom-file-input" id="childPic" required>
                                 </div>
+                            </div>
+                            <div class="form-group col-md-3 pt-3">
+                                <button type="submit" class="btn btn-block btn-default">Submit</button>
                             </div>
                         </div>
                     </form>

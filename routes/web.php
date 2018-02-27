@@ -14,9 +14,9 @@
 Route::get('/', function () {
     return view('containers.home');
 });
-Route::get('/adopt', function () {
-    return view('containers.adopt');
-});
+Route::get('/adopt', 'SponsorController@viewAdopt');
 Route::get('/register', function () {
     return view('containers.register');
 });
+
+Route::post('/register/save','SponsorController@save');
