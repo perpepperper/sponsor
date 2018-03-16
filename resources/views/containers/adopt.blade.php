@@ -6,7 +6,7 @@
         @foreach($children as $child)
         <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 card-container">
             <div class="card">
-                <img class="card-img-top" src="images/adoptpage/card_img1.jpg" alt="card_img1">
+            <img class="card-img-top" src="images/adoptpage/{{$child->image}}" alt="card_img1">
                 <div class="card-body">
                     <p class="name">{{$child->child_fname . ' ' . $child->child_lname}}, {{$child->child_age}} y/o</p>                    
                     <div class="card-content">
@@ -27,18 +27,19 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <div>Posted 18 hours ago</div>
+                <div>Posted : {{Carbon\Carbon::parse($child->created_at)->format('F d, Y')}}</div>
                 </div>
             </div>
         </div>
         @endforeach
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form action="/adopt/save" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <input type="hidden" name="child_id" value="" class="child_id">
+                <input type="hidden" name="id" value="0">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Apply for Adoption</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -46,46 +47,29 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-row">
-                            <div class="col-md-12 upload-text">All uploads must be in image format (eg. jpg, png)</div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">Birth Certificate</label>
-                                        <input type="file" name="birth_c" class="custom-file-input" id="customFile" required>
+                        <div class="row">
+                            <div class="col-12 upload-text">All uploads must be in image format (eg. jpg, png)</div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class=" col-6">
+                                        <label class="input-label" for="firstName">First Name</label>
+                                        <input type="text" name="first_name" class="form-control" id="firstName" placeholder="First Name" required>
                                     </div>
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">Marriage Certificate</label>
-                                        <input type="file" name="marriage_c" class="custom-file-input" id="customFile" required>
+                                    <div class=" col-6">
+                                        <label class="input-label" for="lastName">Last Name</label>
+                                        <input type="text" name="last_name" class="form-control" id="lastName" placeholder="Last Name" required>
                                     </div>
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">Health Certificate</label>
-                                        <input type="file" name="health_c" class="custom-file-input" id="customFile" required>
+                                    <div class=" col-6">
+                                        <label class="input-label" for="age">Age</label>
+                                        <input type="number" name="age" class="form-control" id="age" placeholder="Age" required>
                                     </div>
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">NBI or Police Clearance</label>
-                                        <input type="file" name="nbi_c" class="custom-file-input" id="customFile" required>
+                                    <div class=" col-6">
+                                        <label class="input-label" for="age">Contact</label>
+                                        <input type="text" name="contact" class="form-control" id="age" placeholder="Contact" required>
                                     </div>
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">Proof of income or ITR</label>
-                                        <input type="file" name="itr" class="custom-file-input" id="customFile" required>
-                                    </div>
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">Statement of Acceptance</label>
-                                        <input type="file" name="statement_a" class="custom-file-input" id="customFile" required>
-                                    </div>
-                                    <div class="upload-text">3 Character reference letters</div>
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">1st Character Reference</label>
-                                        <input type="file" name="character_r1" class="custom-file-input" id="customFile" required>
-                                    </div>
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">2nd Character Reference</label>
-                                        <input type="file" name="character_r2" class="custom-file-input" id="customFile" required>
-                                    </div>
-                                    <div class="custom-file upload-field">
-                                        <label class="custom-file-label" for="customFile">3rd Character Reference</label>
-                                        <input type="file" name="character_r3" class="custom-file-input" id="customFile" required>
+                                    <div class=" col-12">
+                                        <label class="input-label" for="location">Address</label>
+                                        <textarea class="form-control" name="address" id="location" rows="3"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +181,7 @@
 <script type="text/javascript">
     function addId(id)
     {
-        $('.child_id').value(id);
+        $('.child_id').val(id);
     }   
 </script>
 @endsection

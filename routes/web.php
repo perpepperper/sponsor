@@ -19,4 +19,13 @@ Route::get('/register', function () {
     return view('containers.register');
 });
 
+Route::group(['middleware' => ['admin']],function(){
+    Route::get('/backend/dashboard','AdminController@dashboard');
+    Route::post('/backend/adopt/action','AdminController@adoptAction');
+});
+
 Route::post('/register/save','SponsorController@save');
+Route::post('/adopt/save','SponsorController@saveAdopt');
+Route::get('/backend/login','AdminController@login');
+Route::post('/backend/postlogin','AdminController@postlogin');
+Route::get('/backend/logout','AdminController@logout');
